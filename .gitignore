@@ -23,6 +23,5 @@ hs_err_pid*
 
 springmvc/.idea
 springmvc/springmvc.iml
-springmvc/out
-springmvc/target
+springmvc/target/classes
 .gitignore.bak
