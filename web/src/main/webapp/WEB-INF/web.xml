@@ -1,0 +1,112 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<!-- 要替换成2.4及以上版本才可以支持el -->
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+ version="2.5"> -->
+ 
+
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<display-name>LoginServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.imooc.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  	
+  	
+  	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+   	<!-- <filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	
+	<filter>
+		<filter-name>FirstFilter</filter-name>
+		<filter-class>com.imooc.filter.FirstFilter</filter-class>
+		 <init-param>
+            <param-name>name</param-name>
+            <param-value>zhangsan</param-value>
+        </init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>FirstFilter</filter-name>
+		<url-pattern>/index.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher><!--  默认为REQUEST -->
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>FirstFilter</filter-name>
+		<url-pattern>/main.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<!-- <error-page>
+		<error-code>404</error-code>
+		<location>/error.jsp</location>
+	</error-page> -->
+	
+	<!-- <filter>
+		<filter-name>SecondFilter</filter-name>
+		<filter-class>com.imooc.filter.SecondFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SecondFilter</filter-name>
+		<url-pattern>/index.jsp</url-pattern>
+	</filter-mapping> -->
+	
+	<!-- <filter>
+		<filter-name>ErrorFilter</filter-name>
+		<filter-class>com.imooc.filter.ErrorFilter</filter-class>
+		
+	</filter>
+	<filter-mapping>
+		<filter-name>ErrorFilter</filter-name>
+		<url-pattern>/error.jsp</url-pattern>
+		<dispatcher>ERROR</dispatcher>--><!--  默认为REQUEST -->
+	<!--  </filter-mapping> -->
+	
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.imooc.servlet.LoginServlet</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+  		<servlet-name>LoginServlet</servlet-name>
+  		<url-pattern>/servlet/LoginServlet</url-pattern>
+  	</servlet-mapping>
+  	<filter>
+  		<filter-name>LoginFilter</filter-name>
+  		<filter-class>com.imooc.filter.LoginFilter</filter-class>
+  		<init-param>
+  			<param-name>notLoginPath</param-name>
+  			<param-value>login.jsp;fail.jsp;LoginServlet</param-value>
+  		</init-param>
+  	</filter>
+  	<filter-mapping>
+  		<filter-name>LoginFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+</web-app>
