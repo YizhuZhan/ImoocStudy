@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>删除表行</title>
+    <style type="text/css">
+        table{
+            border-collapse: collapse;
+        }
+        table,tr,td{
+            border: 1px solid #000;
+        }
+        td{
+            width:20px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var btn = document.getElementById("del");
+            var table = document.getElementById("table");
+            btn.onclick = function(){
+                var inputs = table.getElementsByTagName("input");
+                var trs = table.getElementsByTagName("tr");
+                for(var i = 0; i < inputs.length; i++){
+                    if(inputs[i].checked){
+                        trs[i].parentNode.removeChild(trs[i]);
+                        i--;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<table id = "table">
+    <tr><td><input type="checkbox"></td><td>1</td></tr>
+    <tr><td><input type="checkbox"></td><td>2</td></tr>
+    <tr><td><input type="checkbox"></td><td>3</td></tr>
+    <tr><td><input type="checkbox"></td><td>4</td></tr>
+    <tr><td><input type="checkbox"></td><td>5</td></tr>
+    <tr><td><input type="checkbox"></td><td>6</td></tr>
+</table>
+<button id = "del">删除</button>
+</body>
+</html>

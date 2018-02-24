@@ -1,0 +1,55 @@
+@charset "UTF-8";
+div{
+    margin:0;
+    border: 0;
+    padding:0;
+}
+.content1{
+    background: url("new.jpg") no-repeat;
+    height: 613px;
+    width: 1004px;
+    margin: 0 auto;
+    position: relative;
+}
+#show{
+    color:red;
+    position: absolute;
+    left: 27px;
+    top:108px;
+}
+.content2{
+    background: url(kaoyan.jpg) no-repeat;
+    height:613px;
+    width:959px;
+    margin: 0 auto;
+    position: relative;
+}
+.txtshow{
+    color:#000000;
+    position: absolute;
+    top: 126px;
+    left: 477px;
+}
+#showtime{
+    color: #f00;
+    font-size:24px;
+    font-weight: bold;
+}
+.context3{
+    background: url(product.jpg) no-repeat;
+    width: 1200px;
+    height: 398px;
+    margin: 0 auto;
+    position: relative;
+}
+.time{
+    position: absolute;
+    top:122px;
+    left:46%;
+    color: #000;
+    line-height: 22px;
+    font-size: 14px;
+}
+/*#leftTime{*/
+    /**/
+/*}*/

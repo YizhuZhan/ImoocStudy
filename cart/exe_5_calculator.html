@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>计算器</title>
+    <style type="text/css">
+        div,body{
+            margin: 20px;
+        }
+        input{
+            width: 50px;
+            margin: 10px 20px;
+        }
+        button{
+            height: 20px;
+            width: 20px;
+            margin: 10px;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var plus = document.getElementById("+");
+            var minus = document.getElementById("-");
+            var multi = document.getElementById("*");
+            var divide = document.getElementById("/");
+            var num1 = document.getElementById("num1");
+            var num2 = document.getElementById("num2");
+//            var num1 = document.getElementById("num1").value;
+//            var num2 = document.getElementById("num2").value;
+            var ret = document.getElementById("ret");
+            var p = parseInt;//只取整数部分
+
+            plus.onclick = function () {
+                ret.innerHTML = (p(num1.value) + p(num2.value));
+            }
+//            minus.onclick = function () {
+//                ret.innerHTML = (+(num1.value) - (+num2.value));
+//            }
+            minus.onclick = function(){
+                ret.innerHTML = (p(num1.value) - p(num2.value));
+            }
+            multi.onclick = function () {
+                ret.innerHTML = (p(num1.value) * p(num2.value));
+            }
+            divide.onclick = function () {
+                ret.innerHTML = (p(num1.value) / p(num2.value));
+            }
+        }
+
+    </script>
+</head>
+<body>
+<input id = "num1" type="text"/><input id = "num2" type="text"/>
+<div>结果：<span id = "ret"></span></div>
+<button id = "+">+</button>
+<button id = "-">-</button>
+<button id = "*">*</button>
+<button id = "/">/</button>
+
+</body>
+</html>

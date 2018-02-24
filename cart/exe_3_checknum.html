@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #ret{
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var list = document.getElementById("list");
+            var inputs = list.getElementsByTagName("input");
+            var ret = document.getElementById("ret");
+            var btn = document.getElementById("btn");
+            var len = inputs.length;
+            var checkednum = 0;
+            btn.onclick = function(){
+                checkednum = 0;
+                for(var i = 0;i<len;i++){
+                    if(inputs[i].checked){
+                        checkednum++;
+                    }
+                }
+                if(checkednum > 0){
+                    ret.innerHTML = "已选："+checkednum;
+                    ret.style.display = "block";
+                }else{
+                    ret.style.display = "none";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<ul id = "list">
+    <li><label><input type="checkbox"/>1</label></li>
+    <li><label><input type="checkbox"/>2</label></li>
+    <li><label><input type="checkbox"/>3</label></li>
+    <li><label><input type="checkbox"/>4</label></li>
+    <li><label><input type="checkbox"/>5</label></li>
+</ul>
+<button id = "btn">确定</button>
+<p id = "ret"></p>
+</body>
+</html>

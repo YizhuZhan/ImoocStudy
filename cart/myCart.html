@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="myCart.css"/>
+    <!--<script type="text/javascript" src = "http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>-->
+    <!--<script type="text/javascript">alert($)</script>-->
+</head>
+<body>
+<table id = "cartTable">
+    <thead>
+    <tr>
+        <td><input class = "check-all check" type="checkbox"/>&nbsp;全选</td>
+        <td>商品</td>
+        <td>单价</td>
+        <td>数量</td>
+        <td>小计</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input class = "check-one check" type="checkbox"></td>
+        <td><img src="1.jpg">Casio/卡西欧 EX-TR350</td>
+        <td>5999.88</td>
+        <td class = "count"><span class = "reduce">&nbsp;</span><input type="text" value = "1"/><span class = "add">+</span></td>
+        <td>5999.88</td>
+        <td class = "delete">删除</td>
+    </tr>
+    <tr>
+        <td><input class = "check-one check" type="checkbox"></td>
+        <td><img src="2.jpg">Canon/佳能 PowerShot SX50 HS</td>
+        <td>3888.50</td>
+        <td class = "count"><span class = "reduce">&nbsp;</span><input type="text" value = "1"/><span class = "add">+</span></td>
+        <td>3888.50</td>
+        <td class = "delete">删除</td>
+    </tr>
+    <tr>
+        <td><input class = "check-one check" type="checkbox"></td>
+        <td><img src="3.jpg">Sony/索尼 DSC-WX300</td>
+        <td>1428.50</td>
+        <td class = "count"><span class = "reduce">&nbsp;</span><input type="text" value = "1"/><span class = "add">+</span></td>
+        <td>1428.50</td>
+        <td class = "delete">删除</td>
+    </tr>
+    <tr>
+        <td><input class = "check-one check" type="checkbox"></td>
+        <td><img src="4.jpg">Fujifilm/富士 instax mini 25</td>
+        <td>640.60</td>
+        <td class = "count"><span class = "reduce">&nbsp;</span><input type="text" value = "1"/><span class = "add">+</span></td>
+        <td>640.60</td>
+        <td class = "delete">删除</td>
+    </tr>
+    </tbody>
+</table>
+<div id = "foot">
+    <label><input class = "check-all check" type="checkbox"/>&nbsp;全选</label>
+    <a class = "delete-selected">删除</a>
+    <div id = "totalPrice">结算</div>
+    <div>已选商品
+        <span id = "selectedTotalNum">0</span>件
+        <span class = "arrow-up">︽</span>
+        <span class = "arrow-down">︾</span>
+    </div>
+    <div>合计：￥
+        <span id = "selectedTotalPrice">0.00</span>
+    </div>
+    <div id = "selectedViewList"></div>
+</div>
+<script type="text/javascript" src = "myCart.js"></script>
+</body>
+</html>

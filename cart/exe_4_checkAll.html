@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>全选</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+        li{
+            float:left;
+            margin:20px;
+        }
+        #total{
+            display: none;
+            clear:both;
+        }
+
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var all = document.getElementById("all");
+            var list = document.getElementById("list");
+            var inputs = list.getElementsByTagName("input");
+            var len = inputs.length;
+            var total = document.getElementById("total");
+
+            all.onchange = function(){
+                var checked = this.checked;
+                for(var i = 0; i < len; i++){
+                    inputs[i].checked = checked;
+                }
+                showTotal();
+            }
+
+            for(var k = 0; k < len; k++){
+                inputs[k].onchange = function(){
+                    if(!this.checked){
+                        all.checked = false;
+                    }
+                    showTotal();
+                }
+            }
+
+            function showTotal(){
+                var checknum = 0;
+                for(var j = 0; j < len; j++){
+                    if(inputs[j].checked){
+                        checknum++;
+                    }
+                }
+                total.innerHTML = "已选:"+checknum+"项";
+                total.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+<div><label><input id = "all" type="checkbox"/>全选</label></div>
+<ul id = "list">
+    <li><label><input type="checkbox"/>选项1</label></li>
+    <li><label><input type="checkbox"/>选项2</label></li>
+    <li><label><input type="checkbox"/>选项3</label></li>
+    <li><label><input type="checkbox"/>选项4</label></li>
+    <li><label><input type="checkbox"/>选项5</label></li>
+</ul>
+<div id = "total"></div>
+</body>
+</html>

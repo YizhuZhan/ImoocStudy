@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title>网页定位导航系统</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /**
+        margin: 0 auto;使居中：无效的原因
+        1.要给居中的元素一个宽度，否者无效。
+        2.该元素一定不能浮动，否者无效。
+        3 在HTML中使用<center></center>标签，需考虑好整体构架，否者全部元素都会居中的。
+        */
+        #content {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #content h1 {
+            color: #0088bb;
+        }
+
+        #content .item {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px dotted #0088bb;
+        }
+
+        #content .item h2 {
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 2px solid #0088bb;
+            margin-bottom: 10px;
+        }
+
+        #content .item li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        #content .item li a img {
+            width: 230px;
+            height: 230px;
+            border: none;
+        }
+        /*调位置一般都先left:50%居中之后再设偏移*/
+        /*注意IE6及以下不支持fixed属性，需要进行设置使其兼容*/
+        #menu{
+            position: fixed;
+            top:100px;
+            left: 50%;
+            margin-left: 400px;
+            width:50px;
+        }
+
+        #menu ul li a{
+            display: block;
+            margin:5px 0;
+            font-size: 14px;
+            font-weight: bold;
+            color:#333;
+            width: 80px;
+            height:50px;
+            line-height: 50px;
+            text-decoration: center;
+            test-align:center;
+        }
+       /*鼠标滑过的元素或者.current元素*/
+        #menu ul li a:hover,
+       #menu ul li a.current{
+           color:#fff;
+           background-color: #0088bb;
+       }
+
+/*****************************************配置IE6兼容***********************************/
+
+        /*IE6不支持FIXED属性，添加以下设置可支持IE6.*/
+        /*ie6 hack*/
+        * html #menu {
+            position: absolute;
+            bottom: auto;
+            top: expression(100+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+        }
+        /*这段代码是专为IE6及以下版本写的，
+              帮助相对于窗口固定位置的元素实现无抖动效果，
+              使其能平滑滚动。*/
+        * html, * html body {
+        background-image: url(about:blank);
+        background-attachment: fixed;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            console.log("enter jquery");
+            //需要监听到滚动条滚动事件
+            $(window).scroll(function(){
+                console.log("enter scroll");
+                /**
+                 * 需要用到以下几种方法：
+                 * 1.$(selector).offset(),返回一个带有top、left属性的对象
+                 * 2... .scrollTop()滚动条相对..顶部移动的举例
+                 * 3. ..find("[..=..]")即使没有找到也会返回一个length==0的数组对象
+                 * 4... .attr("href")找到属性并返回其值
+                 * 5.removeClass(),addClass()
+                 */
+                var top = $(document).scrollTop();//相对document的滚动
+//                console.log(top);
+                //通过id查找永远效率比class高，先获得元素避免多次使用时多次查找，提高效率
+                var item = $("#content").find(".item");
+                var menu = $("#menu");
+                var currentId = "";
+                item.each(function(){
+                    $this = $(this);
+                    if(top > $this.offset().top - 300){
+                        currentId = "#"+$this.attr("id");
+                    }
+//                    else{
+//                        return false;
+//                    }
+                });
+                var currentLink = menu.find(".current");
+                if(currentId && currentLink.attr("href") != currentId){
+                    currentLink.removeClass("current");
+//                    currentLink = menu.find(currentId).attr("[href="+currentId+"]");
+                    currentLink = menu.find(currentId);
+//                    currentLink.addClass("current");
+                    menu.find("[href=" + currentId + "]").addClass("current");
+                }
+            });
+
+//下面是慕课网版本：出错原因，window没有转化为jquery对象，scroll事件根本没有被监听到
+//            $(window).scroll(function () {
+////                console.log("enter scroll");
+//                var items = $("#content").find(".item");
+//                var menu = $("#menu");
+//                var top = $(document).scrollTop();
+//                var currentId = ""; //滚动条现在所在位置的item id
+//                items.each(function () {
+//                    var m = $(this);
+//                    //注意：m.offset().top代表每一个item的顶部位置
+//                    if (top > m.offset().top - 300) {
+//                        currentId = "#" + m.attr("id");
+//                    } else {
+//                        return false;
+//                    }
+//                });
+//
+//                var currentLink = menu.find(".current");
+//                if (currentId && currentLink.attr("href") != currentId) {
+//                    currentLink.removeClass("current");
+//                    menu.find("[href=" + currentId + "]").addClass("current");
+//                }
+//            });
+        });
+    </script>
+</head>
+<body>
+    <h1>地狗购物网</h1>
+    <!--div>ul>li*3>a-->
+    <div id="menu">
+       <ul>
+            <!--href="#..."是锚，可以找到name或者id为...的元素-->
+            <li><a href="#item1" class="current">男装</a></li>
+            <li><a href="#item2" class>女装</a></li>
+            <li><a href="#item3" class>美妆</a></li>
+            <li><a href="#item4" class>数码</a></li>
+            <li><a href="#item5" class>母婴</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <div id="item1" class="item">
+            <h2>男装</h2>
+            <ul>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+                <li><a href=#"><img src="1F.jpg" alt/></a></li>
+            </ul>
+        </div>
+        <div id="item2" class="item">
+            <h2>女装</h2>
+            <ul>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+                <li><a href="#"><img src="2F.jpg" alt/></a></li>
+            </ul>
+        </div>
+        <div id="item3" class="item">
+            <h2>美妆</h2>
+            <ul>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+                <li><a href="#"><img src="3F.jpg" alt/></a></li>
+            </ul>
+        </div>
+        <div id="item4" class="item">
+            <h2>数码</h2>
+            <ul>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+                <li><a href="#"><img src="4F.png" alt/></a></li>
+            </ul>
+        </div>
+        <div id="item5" class="item">
+            <h2>母婴</h2>
+            <ul>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+                <li><a href="#"><img src="5F.jpg" alt/></a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

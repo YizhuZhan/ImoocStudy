@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>cookie应用</title>
+    <style>
+        #div1 {width:200px; height:200px; background:#CCC; display:none;}
+    </style>
+    <script>
+        /* 如果没有cookie信息，将显示div，否则不显示。 （请在火狐浏览器下测试） */
+        //设置cookie
+        function setCookie(name, value, iDay){
+            var oDate=new Date();
+            oDate.setDate(oDate.getDate()+iDay);
+            document.cookie=name+'='+value+';expires='+oDate;
+            console.log("after set cookie:  "+document.cookie);//控制台均输出：arrial=1
+        }
+
+        //读取cookie
+        function getCookie(name)
+        {
+            console.log("before get cookie:  "+document.cookie);
+            /**
+             * 没存时控制台输出""，存后输出arrial=1，
+             * 说明本身document.cookie就会隐藏expires项，因此也可以用subString(5)来截取"name="以后的部分
+             */
+
+            var arr=document.cookie.split(';');  //定义一个数组
+            var re=new RegExp('\\b'+name+'=\\w+');  //定义一个正则
+//            var re=new RegExp("/\b"+name+"=\w+/");  //或者这样定义一个正则
+            var res=document.cookie.match(re);  //匹配所选字段
+            if(res){
+                return res[0].split('=')[1]; //如果匹配成功，返回结果
+            }
+            else
+            {
+                return ''; //否则返回空
+            }
+        }
+
+        //删除cookie
+        function removeCookie(name){setCookie(name, '1', -1) }
+        //利用setCookie函数，将时间设置为-1，达到删除效果（默认没有删除方法）
+
+        window.onload=function ()
+        {
+            var oDiv=document.getElementById('div1');
+            console.log("get cookie:  "+getCookie("arrial"));//没存时控制台输出""，存入后输出 1
+//            removeCookie("arrial");
+            if(!getCookie(""))
+            {
+                oDiv.style.display='block';
+                setCookie('arrial', '1', 30);	  //向cookie中添加'arrial', '1', 30
+            }else{
+                oDiv.style.display='none';
+            }
+        };
+    </script>
+</head>
+
+<body>
+<div id="div1">没有cookie信息</div>
+</body>
+</html>

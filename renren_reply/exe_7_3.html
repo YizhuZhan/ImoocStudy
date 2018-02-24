@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        span {
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 获取元素
+            var stars = document.getElementById('stars').getElementsByTagName('span');
+            var ret = document.getElementById('ret');
+
+            //定义getStar函数
+            function getStars(e){
+               //使兼容IE浏览器
+            e = e || window.event;
+            //从传入的事件中获取绑定元素
+            var ele = e.srcElement;
+            var num = parseInt(ele.getAttribute('star'));
+            for(var j = 0; j < 5;j++){
+                stars[j].style.color = j < num ? 'red' : 'black';
+            }
+            ret.innerHTML = num + '星';
+            }
+
+            // 每个星星节点的点击事件
+            for(var i = 0; i < stars.length; i++){
+                stars[i].onclick = function(e){
+                    getStars(e);
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="stars">
+    <span star="1">★</span>
+    <span star="2">★</span>
+    <span star="3">★</span>
+    <span star="4">★</span>
+    <span star="5">★</span>
+</div>
+<div id="ret"></div>
+</body>
+</html>

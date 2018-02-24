@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .con {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .tou {
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            background: #a7cbff;
+        }
+        .tou button {
+            float: left;
+        }
+        .tou .ret {
+            float: right;
+        }
+    </style>
+    <script type="text/javascript">
+        var timer = null;
+
+//             var timer = setInterval(func,1000);
+             // 定义vote函数，计算票数
+             function vote(ele){
+//                 alert(ele);
+
+                 if(timer){
+                     clearTimeout(timer);
+                 }
+                 ele.disabled = true;//tipsssssssssssssssssssssssssssss
+                 var span = document.getElementById('total');
+                 var total = parseInt(span.innerHTML);
+                 span.innerHTML = total + 1;
+                 timer = setTimeout(func,2000);
+             }
+             // 定义disabled函数，禁用投票按钮
+
+           function func(){
+
+               var b = document.getElementsByTagName("button")[0];
+                 b.disabled = false;
+           }
+
+    </script>
+</head>
+<body>
+<div class="con">投票内容</div>
+<div class="tou">
+    <button onclick="vote(this)">投票</button>
+    <span class="ret">总票数：<span id="total">0</span></span>
+</div>
+</body>
+</html>

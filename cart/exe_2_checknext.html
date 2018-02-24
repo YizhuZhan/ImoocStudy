@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #btn{
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+       window.onload = function () {
+           var inp = document.getElementById("inp");
+           var btn = document.getElementById("btn");
+           inp.onchange = function(){
+               var checked = inp.checked;
+               alert(typeof checked);
+//               alert(checked);
+               if(checked){
+                   btn.style.display = "block";
+               }else{
+                   btn.style.display = "none";
+               }
+           }
+       }
+    </script>
+</head>
+<body>
+<div>
+    <p>内容条款</p>
+    <p>内容条款</p>
+    <p>内容条款</p>
+    <p>内容条款</p>
+    <p>内容条款</p>
+    <p>内容条款</p>
+</div>
+<label><input type="checkbox" id = "inp"/>同意条款</label>
+<p><button id = "btn">下一步</button></p>
+</body>
+</html>
