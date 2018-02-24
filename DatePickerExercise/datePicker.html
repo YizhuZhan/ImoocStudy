@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>DatePicker Exercise</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style type="text/css">
+        .datepicker{
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px;
+            width: 230px;
+            height: 24px;
+            line-height: 24px;
+        }
+        .datepicker:focus{
+            outline: 0 none;
+            border: 1px solid #1abc9c;
+        }
+    </style>
+</head>
+<body>
+<input type="text" class="datepicker"/>
+<!--<div class = 'ui-datepicker-wrapper'>-->
+    <!--<div class = 'ui-datapicker-header'>-->
+        <!--<a href="#" class="ui-datepicker-btn ui-datepicker-prev-btn">&lt;</a>-->
+        <!--<a href="#" class="ui-datepicker-btn ui-datepicker-next-btn">&gt;</a>-->
+        <!--<span class="ui-datepicker-curr-month">2018-02</span>-->
+    <!--</div>-->
+    <!--<div class="ui-datepicker-bocy">-->
+        <!--<table>-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>日</th>-->
+                <!--<th>一</th>-->
+                <!--<th>二</th>-->
+                <!--<th>三</th>-->
+                <!--<th>四</th>-->
+                <!--<th>五</th>-->
+                <!--<th>六</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr>-->
+                <!--<td>28</td>-->
+                <!--<td>29</td>-->
+                <!--<td>30</td>-->
+                <!--<td>31</td>-->
+                <!--<td>1</td>-->
+                <!--<td>2</td>-->
+                <!--<td>3</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>4</td>-->
+                <!--<td>5</td>-->
+                <!--<td>6</td>-->
+                <!--<td>7</td>-->
+                <!--<td>8</td>-->
+                <!--<td>9</td>-->
+                <!--<td>10</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>11</td>-->
+                <!--<td>12</td>-->
+                <!--<td>13</td>-->
+                <!--<td>14</td>-->
+                <!--<td>15</td>-->
+                <!--<td>16</td>-->
+                <!--<td>17</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>18</td>-->
+                <!--<td>19</td>-->
+                <!--<td>20</td>-->
+                <!--<td>21</td>-->
+                <!--<td>22</td>-->
+                <!--<td>23</td>-->
+                <!--<td>24</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>25</td>-->
+                <!--<td>26</td>-->
+                <!--<td>27</td>-->
+                <!--<td>28</td>-->
+                <!--<td>1</td>-->
+                <!--<td>2</td>-->
+                <!--<td>3</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td>4</td>-->
+                <!--<td>5</td>-->
+                <!--<td>6</td>-->
+                <!--<td>7</td>-->
+                <!--<td>8</td>-->
+                <!--<td>9</td>-->
+                <!--<td>10</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+</div>
+
+<script type="text/javascript" src="./date.js"></script>
+<script type="text/javascript" src="./main.js"></script>
+<script type="text/javascript">
+    // var monthDate = datepicker.getMonthData(2018,2);
+    // console.log(monthDate);
+    datepicker.init(document.querySelector('.datepicker'));
+</script>
+</body>
+</html>
