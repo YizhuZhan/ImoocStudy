@@ -47,107 +47,134 @@
     let arrow2 = () => 5;
     console.log(arrow2());
 }
+//
+// {
+//     //自行补充：箭头函数的this绑定问题，第一轮
+//     let obj={
+//         fn:function(){
+//             console.log(this);
+//         }
+//     }
+//     obj.fn();//obj本身，{fn: ƒ}
+//
+//     let obj1= {
+//         fn: function () {
+//             setTimeout(function () {
+//                 console.log(this);
+//             });
+//         }
+//     }
+//     obj1.fn();//Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
+//
+//     let obj2={
+//         fn:function(){
+//             setTimeout(() => {
+//                 console.log(this);
+//             });
+//         }
+//     }
+//     obj2.fn();//obj2本身，{fn: ƒ}
+//
+//     let obj3={
+//         num:3,
+//         fn:function(){
+//             setTimeout(function(){
+//                 console.log(this.num);
+//             });
+//         }
+//     }
+//     obj3.fn();//undefined
+//
+//     var obj4={
+//         num:4,
+//         fn:function(){
+//             setTimeout(() => {
+//                 console.log(this.num);
+//             });
+//         }
+//     }
+//     obj4.fn();//4
+//
+//     //自行补充：箭头函数的this绑定问题，第二轮嵌套函数，？？？？？？？？？？？？
+//     let obj5={
+//         num:4,
+//         fn:function(){
+//             let f=() => {
+//                 console.log(this);//obj5
+//                 setTimeout(() => {
+//                     console.log(this);//obj5
+//                 });
+//             }
+//             f();
+//         }
+//     }
+//     obj5.fn();
+//
+//     // obj6的例子看到undefined undefined  ???????????????????????????
+//
+//
+//     let obj7={
+//         num:4,
+//         fn:function(){
+//             let f=() => {
+//                 console.log(this); //obj7,f()定义在obj7对象中，this就指向obj7,这就是箭头函数this指向的关键
+//                 setTimeout(function() {
+//                     console.log(this);//window，非箭头函数的情况下还是要看宿主对象是谁，如果没有被对象调用，函数体中的this就绑定的window上
+//                 });
+//             }
+//             f();
+//         }
+//     }
+//     obj7.fn();
+// }
 
 {
-    // //自行补充：箭头函数的this绑定问题，第一轮
-    let obj={
-        fn:function(){
-            console.log(this);
-        }
-    }
-    obj.fn();//obj
-
-    let obj1= {
-        fn: function () {
-            setTimeout(function () {
-                console.log(this);
-            });
-        }
-    }
-    obj1.fn();//window
-
-    let obj2={
-        fn:function(){
-            setTimeout(() => {
-                console.log(this);
-            });
-        }
-    }
-    obj2.fn();//obj2
-
-    let obj3={
-        num:3,
-        fn:function(){
-            setTimeout(function(){
-                console.log(this.num);
-            });
-        }
-    }
-    obj3.fn();//undefined
-
-    var obj4={
-        num:4,
-        fn:function(){
-            setTimeout(() => {
-                console.log(this.num);
-            });
-        }
-    }
-    obj4.fn();//4
-
-    //自行补充：箭头函数的this绑定问题，第二轮嵌套函数
-    let obj5={
-        num:4,
-        fn:function(){
-            let f=() => {
-                console.log(this);//obj5
-                setTimeout(() => {
-                    console.log(this);//obj5
-                });
-            }
-            f();
-        }
-    }
-    obj5.fn();
-
-    // obj6的例子看到undefined undefined  ???????????????????????????
-    let obj6={
-        num:4,
-        fn:function(){
-            let f=function(){
-                console.log(this); //window,因为函数f定义后并没有对象调用，this直接绑定到最外层的window对象,
-                setTimeout(() => {
-                    console.log(this);//window，外层this绑定到了window,内层也相当于定义在window层（全局环境）
-                });
-            }
-            f();
-        }
-    }
-    obj6.fn();
-
-    let obj7={
-        num:4,
-        fn:function(){
-            let f=() => {
-                console.log(this); //obj7,f()定义在obj7对象中，this就指向obj7,这就是箭头函数this指向的关键
-                setTimeout(function() {
-                    console.log(this);//window，非箭头函数的情况下还是要看宿主对象是谁，如果没有被对象调用，函数体中的this就绑定的window上
-                });
-            }
-            f();
-        }
-    }
-    obj7.fn();
-}
-
-{
-    //伪调用，函数的最后一句是个函数的情况叫做伪调用；
-    //伪调用的好处是：提升性能，比递归等节省资源，什么时候用伪调用，如果有嵌套调用，为了提升性能，建议写成伪调用的形式。
+    //尾调用，ES6中的新特性，某个函数的最后一步return时再调用另一个函数，它的功能特别强大；
+    //尾调用的好处是：提升性能，比递归等节省资源，什么时候用伪调用，如果有嵌套调用，为了提升性能，建议写成伪调用的形式，
+    // 尾递归优化只在严格模式下生效，非严格模式下需要自己实现尾递归优化。
+    //不return不算尾调用，调用后有其它赋值操作也不算尾调用
     function tail(x) {
         console.log('tail',x);
     }
     function fx(x) {
         return tail(x);
     }
-    fx(123);
+    fx(123);//tail 123
+
+    //尾递归，实现阶乘，只保留一个调用栈（记录调用位置和内部变量等信息），不会产生栈溢出错误
+    function tailFactorial(n, total) {
+        if (n === 1) return total;
+        return tailFactorial(n - 1, n * total);
+    }
+    function factorial(n) {
+        return tailFactorial(n, 1);
+    }
+    console.log(factorial(3));//6
+    console.log(factorial(4));//24
+    console.log(factorial(5));//120
+    // 利用默认值的方法不对，无法保存默认值处的 n * total 值：
+    // function factorial1(n, total = 1) {
+    //     console.log('n = ',n,'  ;t = ',total);
+    //     if (n === 1) return total;
+    //     return factorial(n - 1, n * total);
+    // }
+    // console.log(factorial1(3));//6
+    // console.log(factorial1(4));//24
+    // console.log(factorial1(5));//120
+    //尾递归，实现斐波那契数列
+    function Fibonacci2 (n , ac1 = 1 , ac2 = 1) {
+        if( n <= 1 ) {return ac2};
+        return Fibonacci2 (n - 1, ac2, ac1 + ac2);
+    }
+    // console.log(Fibonacci2(100)); // 573147844013817200000
+    // console.log(Fibonacci2(1000)); //  7.0330367711422765e+208
+    // Fibonacci2(10000) // Infinity
+    // console.log(Fibonacci2(1));
+    // console.log(Fibonacci2(2));
+    // console.log(Fibonacci2(3));
+    // console.log(Fibonacci2(4));
+    // console.log(Fibonacci2(5));
+
+
+
 }

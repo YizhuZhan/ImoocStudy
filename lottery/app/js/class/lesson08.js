@@ -44,9 +44,8 @@
     //新增API: 1. Object.is() 功能与===相同；2.Object.assign()浅拷贝；3.Object.entries()
     console.log(Object.is('a','a'),'a'==='a');//true true
     console.log(Object.is([],[]),[]===[]);//false false，引用不同
-
     console.log(Object.assign({a:1},{b:2}));//{a: 1, b: 2}，浅拷贝，即引用类型拷贝引用地址；只拷贝自身对象的属性，不拷贝继承的属性；也不拷贝不可枚举的属性
-    console.log(Object.assign({y:1},{x:{a:3},y:2}).x.a);//3,可以深拷贝了吗？？？？？？？？？
+    console.log(Object.assign({y:1},{x:{a:3},y:2}).x.a);//3
 
     let test = {k:123,o:456};
     for(let [key, value] of Object.entries(test)){
