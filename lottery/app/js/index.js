@@ -1,5 +1,5 @@
 // import 'babel-polyfill';
-import './class/lesson08.js';
+import './class/lesson10.js';
 // import './class/proxy&reflect.js';
 
 // import './lottery/calculate.js';
