@@ -159,3 +159,24 @@
     }
     pull();
 }
+
+{
+    //Generator 结合数组解构，见 Lesson02
+    //注意，数组解构赋值的模式同样适用于任意迭代器，重点！！！ 可以结合 Lesson 15 学习：
+    function* fibs() {
+        var a = 0;
+        var b = 1;
+        while (true) {
+            yield a;
+            [a, b] = [b, a + b];
+        }
+    }
+    var [first, second, third, fourth, fifth, sixth] = fibs();
+    console.log(first);//a = 0, b = 1
+    console.log(second);//a = 1, b = 1
+    console.log(third);//a = 1, b=  2
+    console.log(fourth);//a = 2, b = 3
+    console.log(fifth);//a = 3, b = 5
+    console.log(sixth);//a = 5, b = 8
+
+}

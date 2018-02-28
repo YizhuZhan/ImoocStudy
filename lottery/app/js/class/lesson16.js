@@ -5,7 +5,7 @@
         console.log(`name ${name}`);// name time
         console.log(`descriptor ${descriptor}`);// descriptor [object Object]
         descriptor.writable = false;
-        return descriptor
+        return descriptor;
     }
 
 

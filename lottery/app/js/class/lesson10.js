@@ -17,6 +17,7 @@
     console.log(list.size);//5
 }
 
+
 {
     //在同一个块作用域下，chrome控制台显示的set size以最新的为主，也就是说，当size改变时，之前打印出来的set size也显示为最新的size值，应该是chrome的问题
     //has , delete , clear , add

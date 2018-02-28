@@ -65,3 +65,35 @@
     // }
 }
 
+{
+    //关于浅拷贝和深拷贝看过来
+    /**
+     * JavaScript 中永远是按值传递（pass-by-value），只不过当我们传递的是某个对象的引用时，这里的值指的是对象的引用。
+     * 按值传递中函数的形参是被调用时所传实参的副本。修改形参的值并不会影响实参。
+     * 而按引用传递（pass-by-reference）时，函数的形参接收实参的隐式引用，而不再是副本。
+     * 这意味着函数形参的值如果被修改，实参也会被修改。同时两者指向相同的值。
+     */
+    function changeStuff(a, b, c) {
+        a = a * 10;
+        b.item = "changed";
+        c = {item: "changed"};
+    }
+    let num = 10;
+    let obj1 = {item: "unchanged"};
+    let obj2 = {item: "unchanged"};
+    changeStuff(num, obj1, obj2);
+    console.log(num);//10
+    console.log(obj1.item);//changed
+    console.log(obj2.item);//unchanged
+
+
+    //JavaScript 中是支持变量的连续赋值,例如 let a = b = 1; 但是在连续赋值中，会发生引用保留
+    let a = {n:1};
+    let b = a; // 持有a，以回查
+    console.log(b);//{n:1}
+    a.x = a = {n:2};
+    console.log(a.x);//undefined
+    console.log(a);//{n: 2}
+    console.log(b);//{n: 1, x: {n: 2}}
+}
+

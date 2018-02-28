@@ -47,12 +47,92 @@
     }
 
     for(let key of obj){
-        console.log(key);
+        console.log(key);//1 3 2 7 9 8
     }
 }
 
+{
+    //Spread Operator 与 Iteration Protocols：
+    // 实际上 Spread Operator 也是使用的 Iteration Protocols 来进行元素遍历与结果搜集；
+    // 因此我们也可以通过自定义 Iterator 的方式来控制 Spread Operator 的表现。
+    // Iterable 协议规定了对象必须包含 Symbol.iterator 方法，该方法返回某个 Iterator 对象：
 
+//     interface Iterable {
+//         [Symbol.iterator]() {
+//             //...
+//             return Iterator;
+//         }
+//     }
 //
+//
+//     interface Iterable {
+//     [Symbol.iterator]() {
+//         //...
+//         return Iterator;
+//     }
+// }
+
+    /**
+     * 该 Iterator 对象从属于 Iterator Protocol，其需要提供 next 成员方法，该方法会返回某个包含 done 与 value 属性的对象：
+     */
+    // interface Iterator {
+    //     next() {
+    //         //...
+    //         return {
+    //             value: <value>,
+    //             done: <boolean>
+    //     };
+    //     };
+    // }
+
+    /**
+     * 典型的 Iterable 对象就是字符串，例如：
+     */
+    let str = 'hi';
+    let iterator = str[Symbol.iterator]();
+    console.log(iterator.toString()); // '[object String Iterator]'
+    console.log(iterator.next());     //{ value: 'h', done: false }
+    console.log(iterator.next());     //{ value: 'i', done: false }
+    console.log(iterator.next());     //{ value: undefined, done: true }
+    console.log(([...str])); //(2) ['h', 'i']
+}
+
+{
+    // 我们可以通过自定义 array-like 对象的 Symbol.iterator 属性来控制其在迭代器上的效果：
+    function iterator() {
+        var index = 0;
+        return {
+            next: () => ({ // Conform to Iterator protocol
+                done: index >= this.length,
+                value: this[index++]
+            })
+        };
+    }
+
+    var arrayLike = {
+        0: 'Cat',
+        1: 'Bird',
+        length: 2
+    };
+    // Conform to Iterable Protocol
+    arrayLike[Symbol.iterator] = iterator;
+    var array = [...arrayLike];
+    console.log(array); // ['Cat', 'Bird']
+    /**
+     * arrayLike[Symbol.iterator] 为该对象创建了值为某个迭代器的属性，从而使该对象符合了 Iterable 协议；
+     * 而 iterator() 又返回了包含 next 成员方法的对象，使得该对象最终具有和数组相似的行为表现。
+     */
+
+}
+
+{
+
+
+
+}
+
+
+
 // {
 //     let arr = ['hello','world'];
 //     for(let value of arr){

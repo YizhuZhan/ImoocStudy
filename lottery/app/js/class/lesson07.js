@@ -32,12 +32,88 @@
         }
     }
     test3(1,2,3,4,'a');
+
+    /**
+     * 在 JavaScript 函数调用时我们往往会使用内置的 arguments 对象来获取函数的调用参数，不过这种方式却存在着很多的不方便性。
+     * 譬如 arguments 对象是 Array-Like 对象，无法直接运用数组的 .map() 或者 .forEach() 函数；
+     * 并且因为 arguments 是绑定于当前函数作用域，如果我们希望在嵌套函数里使用外层函数的 arguments 对象，我们还需要创建中间变量。
+     *
+     * ES6 中为我们提供了 Rest Operator 来以数组形式获取函数的调用参数，Rest Operator 也可以用于在解构赋值中以数组方式获取剩余的变量：
+     */
+    function outerFunction() {
+        // store arguments into a separated variable
+        var argsOuter = arguments;
+        function innerFunction() {
+            // args is an array-like object
+            var even = Array.prototype.map.call(argsOuter, function(item) {
+                // do something with argsOuter
+            });
+        }
+    }
+
+    function countArguments(...args) {
+        return args.length;// get the number of arguments
+    }
+    countArguments('welcome', 'to', 'Earth'); //3
+
+    //典型的 Rest Operator 的应用场景譬如进行不定数组的指定类型过滤：
+    function filter(type, ...items) {
+        return items.filter(item => typeof item === type);//数组 items 过滤，返回满足条件的 item 数组
+    }
+    console.log(filter('boolean',true,0,1,false));//(2) [true, false]
+    console.log(filter('number',true,0,1,false,'welcome'));//(2) [0, 1]
+
+    /**
+     * 尽管 Arrow Function 中并没有定义 arguments 对象，但是我们仍然可以使用 Rest Operator 来获取 Arrow Function 的调用参数：
+     * tips: 数组的 reduce() 方法，非es6 特有方法， js 方法
+     */
+    (function () {
+        let outerArguments = arguments;
+        //模拟concat函数
+        const concat = (...items)  => {
+            console.log(arguments === outerArguments);//true
+            return items.reduce(((result,nextItem) => result + nextItem),'');
+        }
+        console.log(typeof concat(1,5,'nine'),concat(1,5,'nine'));//string 15nine
+    })();
 }
 
 {
-    //把数组拆成离散的值
+    //把数组拆成离散的值，Spread Operator
     console.log(...[1,2,4]);
     console.log('a',...[1,2,4]);
+    /**
+     * Spread Operator 则与 Rest Opeator 的功能正好相反，其常用于进行数组构建与解构赋值，
+     * 也可以用于将某个数组转化为函数的参数列表，其基本使用方式如下：
+     */
+    let cold = ['autumn','winter'];
+    let warm = ['spring','summer'];
+    console.log([...cold,...warm]);//(4) ["autumn", "winter", "spring", "summer"]
+
+    //我们也可以使用 Spread Operator 来简化函数调用：
+    class King{
+        constructor(name, country){
+            this.name = name;
+            this.country = country;
+        }
+        getDescription(){
+            return `${this.name} leads ${this.country}`;
+        }
+    }
+    let details = ['Alexander the Great', 'Greece'];
+    let king = new King(...details);
+    console.log(king.getDescription());
+
+    //下面方法报错，不支持
+    //还有另外一个好处就是可以用来替换 Object.assign 来方便地从旧有的对象中创建新的对象，并且能够修改部分值；譬如：
+    let obj = {a:1,b:2};
+    let obj_new_1 = Object.assign({},obj,{a:3});//{a:3,b:2}
+    // let obj_new_2 = {
+    //     ...obj,
+    //     a:3
+    // }//报错，不支持
+    console.log(obj_new_1);
+    // console.log(obj_new_2);
 }
 
 {
