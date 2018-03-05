@@ -115,12 +115,16 @@
 {
     //map 和 Array的对比：增删改查
     let map = new Map();
+
+    console.log(map);
     let arr = [];
     //增
     map.set('a',1);//map
     map.set('b',2);//Map(2) {"a" => 1, "b" => 2},    0:{a=> 1} 1:{b=> 2}
+    map.set(2,3);
     arr.push({'a':1});//1
     arr.push({'b':2});//2     [ 0:{a: 1}1:{b: 2}]
+    arr.push({2:3});
     // arr.push({'a':3});
     console.log(map,arr);//均为 0:{a:1}
     //查
@@ -129,15 +133,17 @@
     console.log(map_exist,arr_exist);//true {a: 1}
     //改
     map.set('b',33);
-    arr.forEach(item => item.b ? item.b = 33 : '');// notice !!!!!!!!!!! 找到满足条件的 b 即改成33，否则什么都不做
+    let index_modify = arr.findIndex(item => item.b);
+    arr[index_modify].b = 33;
+    // arr.forEach(item => item.b ? item.b = 33 : '');// notice !!!!!!!!!!! 找到满足条件的 b 即改成33，否则什么都不做
     console.log(map,arr);
     console.log(arr.find(item=>item.b));
-    //删
-    map.delete('b');
-    // console.log(arr);//查看数组确实没有delete,remove等方法，可以得到index，然后用splice(index,1)来实现
-    let index = arr.findIndex(item=>item.b);//1  notice !!!!!!!!!!,找到第一个满足条件的即返回，返回这个元素的下标，notice !!!!!!!!!
-    arr.splice(index,1);//  notice !!!!!!!!!!!!!!
-    console.log(map,arr);
+    // //删
+    // map.delete('b');
+    // // console.log(arr);//查看数组确实没有delete,remove等方法，可以得到index，然后用splice(index,1)来实现
+    // let index = arr.findIndex(item=>item.b);//1  notice !!!!!!!!!!,找到第一个满足条件的即返回，返回这个元素的下标，notice !!!!!!!!!
+    // arr.splice(index,1);//  notice !!!!!!!!!!!!!!
+    // console.log(map,arr);
 }
 
 {
