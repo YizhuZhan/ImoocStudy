@@ -9,42 +9,18 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-var express = require('express')
+
+const express = require('express')
+const app = express();
+const appData = require('../data.json');
+const seller = appData.seller;
+const goods = appData.goods;
+const ratings = appData.ratings;
+const apiRouter = express.Router();
+app.use(apiRouter);
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
-
-var app = express();
-
-var appData = require('../data.json');
-var seller = appData.seller;
-var goods = appData.goods;
-var ratings = appData.ratings;
-
-var apiRoutes = express.Router();
-
-apiRoutes.get('/seller',function (req,res) {
-  res.json({
-    errno:0,
-    data:seller
-  })
-});
-
-apiRoutes.get('/goods',function (req,res) {
-  res.json({
-    errno:0,
-    data:goods
-  })
-});
-
-apiRoutes.get('/ratings',function (req,res) {
-  res.json({
-    errno:0,
-    data:ratings
-  })
-});
-
-app.use('/api',apiRoutes);
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -75,6 +51,26 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before(app){
+      app.get('/api/goods',(req,res) => {
+        res.json({
+          errno: 0,
+          data:goods
+        })
+      });
+      app.get('/api/ratings',(req,res) => {
+        res.json({
+          errno: 0,
+          data: ratings
+        })
+      });
+      app.get('api/seller',(req,res) => {
+        res.json({
+          errno: 0,
+          data: seller
+        })
+      });
     }
   },
   plugins: [
