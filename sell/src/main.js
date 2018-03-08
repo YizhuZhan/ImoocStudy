@@ -27,7 +27,7 @@ const routes = [
     component: seller
   },
   {
-    path: 'rating',
+    path: '/rating',
     component: rating
   }
 ];
