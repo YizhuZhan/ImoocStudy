@@ -11,14 +11,20 @@
         </div>
         <div class="description">{{seller.description}}/{{seller.deliveryTime}}分钟送达</div>
         <div v-if = "seller.supports" class = "support">
-          <span class = "icon"></span>
+          <span class = "icon" :class="classMap[seller.supports[0].type]"></span>
           <span class = "text">{{seller.supports[0].description}}</span>
         </div>
       </div>
+      <div v-if="seller.supports" class="support-count">
+        <span class="count">{{seller.supports.length}}个</span>
+        <i class="icon-keyboard_arrow_right"></i>
+      </div>
     </div>
     <div class="bulletin-wrapper">
-      <div></div>
+      <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
+      <i class="icon-keyboard_arrow_right"></i>
     </div>
+    <div class=""></div>
   </div>
 </template>
 
@@ -28,17 +34,21 @@
       'seller':{
         type: Object
       }
+    },
+    created(){
+      this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
     }
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
-  @import "../../common/stylus/base.styl"
+  /*@import "../../common/stylus/base.styl"*/
   .header
     color: #fff
-    background: #000
+    background: #999
     .content-wrapper
+      position: relative
       padding: 24px 12px 18px 24px
       font-size: 0
       .avatar
@@ -69,7 +79,68 @@
           line-height: 12px
         .support
           .icon
+            display: inline-block
+            vertical-align: top
             height: 12px
-            weight: 12px
-
+            width: 12px
+            margin-right: 4px
+            background-size: 12px 12px
+            background-repeat: no-repeat
+            &.decrease
+              bg-image('decrease_1')
+            &.discount
+              bg-image('discount_1')
+            &.special
+              bg-image('special_1')
+            &.invoice
+              bg-image('invoice_1')
+            &.guarantee
+              bg-image('guarantee_1')
+          .text
+            line-height: 12px
+            font-size: 10px
+      .support-count
+        position: absolute
+        right: 12px
+        bottom: 14px
+        padding: 0px 8px
+        height: 24px
+        line-height: 24px
+        border-radius: 14px
+        background-color: rgba(0,0,0,0.2)
+        text-align: center
+        .count
+          vertical-align: top
+          font-size: 10px
+        .icon-keyboard_arrow_right
+          margin-left: 2px
+          line-height: 24px
+          font-size: 10px
+    .bulletin-wrapper
+      height: 28px
+      line-height: 28px
+      padding: 0px 22px 0px 12px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      background-color: rgba(7,17,27,0.2)
+      //font-size: 0px
+      .bulletin-title
+        display: inline-block
+        width: 22px
+        height: 12px
+        margin-top: 7px
+        vertical-align: top
+        bg-image('bulletin')
+        background-size: 22px 12px
+        background-repeat: no-repeat
+      .bulletin-text
+        margin: 0px 4px
+        vertical-align: top
+        font-size:10px
+      .icon-keyboard_arrow_right
+        position: absolute
+        right: 12px
+        margin-top: 8px
+        font-size: 10px
 </style>

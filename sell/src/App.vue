@@ -42,7 +42,7 @@
 </script>
 
 <style lang="stylus" ref="stylesheet/stylus">
-  @import "./common/stylus/mixin.styl"
+  @import "./common/stylus/mixin.styl";
   .tab
     display: flex
     width: 100%
