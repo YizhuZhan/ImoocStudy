@@ -66,6 +66,7 @@
 
 <script type="text/ecmascript6">
   import star from 'components/star/star';
+  import goods from 'components/goods/goods';
   export default {
     props: {
       'seller':{
@@ -89,7 +90,8 @@
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
     },
     components: {
-      star
+      star,
+      goods
     }
   };
 </script>
