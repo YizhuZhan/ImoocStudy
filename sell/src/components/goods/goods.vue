@@ -1,6 +1,6 @@
 <template>
   <div class="goods">
-    <div class="menu-wrapper">
+    <div class="menu-wrapper" ref="menuWrapper">
       <ul>
         <li v-for="(item,index) in goods" class="menu-item" v-bind:key="index">
           <span class="text border-1px">
@@ -9,7 +9,7 @@
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper">
+    <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
         <li v-for="(item,index) in goods" class="food-list" v-bind:key="index">
           <h1 class="title">{{item.name}}</h1>
@@ -22,12 +22,10 @@
                 <div class="name">{{food.name}}</div>
                 <div class="desc">{{food.description}}</div>
                 <div class="extra">
-                  <span>月售{{food.sellCount}}</span>
-                  <span>好评率{{food.rating}}%</span>
+                  <span class="count">月售{{food.sellCount}}</span><span>好评率{{food.rating}}%</span>
                 </div>
                 <div class="price">
-                  <span>￥{{food.price}}</span>
-                  <span v-show="food.oldPrice" class="oldPrice">￥{{food.oldPrice}}</span>
+                  <span class="new">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
               </div>
             </li>
@@ -39,6 +37,7 @@
 </template>
 
 <script type="text/ecmascript6">
+  import BScroll from 'better-scroll';
   const ERR_OK = 0;
   export default{
     props: {
@@ -52,6 +51,9 @@
         response = response.body;
         if(response.errno === ERR_OK){
           this.goods = response.data;
+          this.$nextTick(() => {
+            this._initScroll();
+          });
         }
       });
     },
@@ -59,6 +61,12 @@
       return {
         goods:{}
       };
+    },
+    methods: {
+      _initScroll() {
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {});
+        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {});
+      }
     }
   };
 </script>
@@ -137,25 +145,30 @@
             margin-left: 10px
             font-size: 10px
             .name
-              margin-top: 2px
+              margin: 2px 0px 8px 0px
               line-height: 14px
               font-size: 14px
               color:rgb(7,17,27)
-            .desc,
-            .extra
-              margin-top: 8px
+            .desc,.extra
+              margin-bottom: 8px
               line-height: 10px
               font-size: 10px
-              color: rgb(147,153,159)
+              color: rgb(147, 153, 159)
+            .desc
+              line-height: 12px
+            .extra
+              .count
+                margin-right: 12px
             .price
-              display: inline-block
               margin-top: 8px
-              font-size: 14px
+              line-height: 24px
               font-weight:700
-              color: rgb(147,153,159)
-              .oldPrice
-                display: inline-block
-                margin-left:8px
+              .new
+                margin-right: 8px
+                font-size: 14px
+                color: rgb(240, 20, 20)
+              .old
+                text-decoration: line-through
                 font-size:10px
                 color: rgb(147,153,159)
 </style>
