@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item,index) in goods" class="menu-item" v-bind:key="index">
+        <li v-for="(item,index) in goods" class="menu-item" :class="{'current': currentIndex === index}" v-bind:key="index">
           <span class="text border-1px">
             <span v-show="item.type > 0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -53,19 +53,46 @@
           this.goods = response.data;
           this.$nextTick(() => {
             this._initScroll();
+            this._calculateHeight();
           });
         }
       });
     },
     data() {
       return {
-        goods:{}
+        goods:{},
+        scrollY: 0,
+        listHeight: []
       };
     },
     methods: {
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {});
-        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {});
+        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {probeType: 3});
+        this.foodsScroll.on('scroll', (pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y));
+        });
+      },
+      _calculateHeight() {
+        let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list');
+        let height = 0;
+        this.listHeight.push(height);
+        for(let i = 0; i < foodList.length; i++) {
+          let item = foodList[i];
+          height += item.clientHeight;
+          this.listHeight.push(height);
+        }
+      }
+    },
+    computed: {
+      currentIndex() {
+        let listHeight = this.listHeight;
+        for(let i = 0; i < this.listHeight.length; i++) {
+          if(this.scrollY > listHeight[i] && this.scrollY < listHeight[i + 1]) {
+            return i;
+          }
+        }
+        return 0;
       }
     }
   };
