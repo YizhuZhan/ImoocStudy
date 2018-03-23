@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>position</title>
+    <style>
+        .div1{
+            background-color: red;
+            padding:20px;
+            position: relative;
+        }
+        .div2{
+            position: absolute; /* 添加position:absolute使其脱离文档流*/
+            height: 200px;
+            width: 200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div class="div1">
+    <div class="div2"></div>
+</div>
+</body>
+</html>
