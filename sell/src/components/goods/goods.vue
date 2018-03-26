@@ -1,43 +1,47 @@
 <template>
-  <div class="goods">
-    <div class="menu-wrapper" ref="menuWrapper">
-      <ul>
-        <li v-for="(item,index) in goods" class="menu-item" :class="{'current': currentIndex === index}" v-bind:key="index">
+  <div>
+    <div class="goods">
+      <div class="menu-wrapper" ref="menuWrapper">
+        <ul>
+          <li v-for="(item,index) in goods" class="menu-item" :class="{'current': currentIndex === index}" v-bind:key="index" @click="selectMenu(index, $event)">
           <span class="text border-1px">
             <span v-show="item.type > 0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
-        </li>
-      </ul>
-    </div>
-    <div class="foods-wrapper" ref="foodsWrapper">
-      <ul>
-        <li v-for="(item,index) in goods" class="food-list" v-bind:key="index">
-          <h1 class="title">{{item.name}}</h1>
-          <ul>
-            <li v-for="(food,index) in item.foods" class="food-item border-1px" v-bind:key="index">
-              <div class="icon">
-                <img height="57" width="57" :src="food.icon">
-              </div>
-              <div class="content">
-                <div class="name">{{food.name}}</div>
-                <div class="desc">{{food.description}}</div>
-                <div class="extra">
-                  <span class="count">月售{{food.sellCount}}</span><span>好评率{{food.rating}}%</span>
+          </li>
+        </ul>
+      </div>
+      <div class="foods-wrapper" ref="foodsWrapper">
+        <ul>
+          <li v-for="(item,index) in goods" class="food-list food-list-hook" v-bind:key="index">
+            <h1 class="title">{{item.name}}</h1>
+            <ul>
+              <li v-for="(food,index) in item.foods" class="food-item border-1px" v-bind:key="index">
+                <div class="icon">
+                  <img height="57" width="57" :src="food.icon">
                 </div>
-                <div class="price">
-                  <span class="new">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                <div class="content">
+                  <div class="name">{{food.name}}</div>
+                  <div class="desc">{{food.description}}</div>
+                  <div class="extra">
+                    <span class="count">月售{{food.sellCount}}</span><span>好评率{{food.rating}}%</span>
+                  </div>
+                  <div class="price">
+                    <span class="new">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <shopcart></shopcart>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript6">
   import BScroll from 'better-scroll';
+  import shopcart from 'components/shopcart/shopcart';
   const ERR_OK = 0;
   export default{
     props: {
@@ -67,8 +71,12 @@
     },
     methods: {
       _initScroll() {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {});
-        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {probeType: 3});
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+          click: true
+        });
+        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+          probeType: 3
+        });
         this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y));
         });
@@ -82,18 +90,32 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
+      },
+      selectMenu(index, event) {
+        if (!event._constructed) {
+          return;
+        }
+        let foodsList = this.$refs.foodsWrapper.getElementsByClassName('food-list');
+        let el = foodsList[index];
+        this.foodsScroll.scrollToElement(el, 300);
+        console.log(this.currentIndex);
       }
     },
     computed: {
       currentIndex() {
         let listHeight = this.listHeight;
         for(let i = 0; i < this.listHeight.length; i++) {
-          if(this.scrollY > listHeight[i] && this.scrollY < listHeight[i + 1]) {
+          let height1 = listHeight[i];
+          let height2 = listHeight[i + 1];
+          if(height2 && this.scrollY >= height1 && this.scrollY < height2) {
             return i;
           }
         }
         return 0;
       }
+    },
+    components: {
+      shopcart
     }
   };
 </script>
@@ -119,6 +141,14 @@
         height: 54px
         width: 56px
         line-height: 14px
+        &.current
+          position: relative
+          z-index: 10
+          margin-top: -1px
+          background: #fff
+          font-weight: 700
+          .text
+            border-none()
         .text
           display: table-cell
           width:56px
