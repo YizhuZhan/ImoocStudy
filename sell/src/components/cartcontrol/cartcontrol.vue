@@ -1,11 +1,13 @@
 <template>
   <div class="cartcontrol">
-    <div class="cart-decrease" v-show="food.count > 0" @click="decreaseCart($event)">
-      <i class="icon-remove_circle_outline"></i>
-    </div>
+    <transition name="move">
+      <div class="cart-decrease" v-show="food.count > 0" @click="decreaseCart($event)">
+        <div class="inner icon-remove_circle_outline"></div>
+      </div>
+    </transition>
     <div class="cart-count" v-show="food.count > 0">{{food.count}}</div>
     <div class="cart-add" @click="addCart($event)">
-      <i class="icon-add_circle"></i>
+      <div class="icon-add_circle"></div>
     </div>
   </div>
 </template>
@@ -26,7 +28,9 @@
         if(!this.food.count) {
           Vue.set(this.food, 'count', 1);
         } else{
-          this.food.count++;
+          let count = this.food.count + 1
+          Vue.delete(this.food, 'count');
+          Vue.set(this.food, 'count', count);
         }
         console.log(this.food.count);
       },
@@ -35,9 +39,12 @@
           return;
         }
         if(this.food.count > 0) {
-          this.food.count--;
+          let count = this.food.count - 1
+          Vue.delete(this.food, 'count');
+          if(count > 0) {
+            Vue.set(this.food, 'count', count);
+          }
         }
-        console.log(this.food.count);
       }
     }
   };
@@ -49,10 +56,22 @@
     color: rgb(0,160,220)
     .cart-decrease
       display: inline-block
-      height: 24px
       margin: 0 6px
-      line-height: 24px
-      font-size: 24px
+      opacity: 1
+      transform: translate3d(0, 0, 0)
+      .inner
+        height: 24px
+        line-height: 24px
+        font-size: 24px
+        transition: all 0.4s linear
+        transform: rotate(0)
+      &.move-enter-active,&.move-leave-active
+        transition: all 0.4s linear
+      &.move-enter, &.move-leave-active
+        opacity: 0
+        transform: translate3d(24px, 0, 0)
+        .inner
+          transform: rotate(180deg)
     .cart-count
       display: inline-block
       height: 24px
