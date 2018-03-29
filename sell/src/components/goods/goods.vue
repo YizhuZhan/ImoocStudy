@@ -37,7 +37,7 @@
           </li>
         </ul>
       </div>
-      <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+      <shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
     </div>
   </div>
 </template>
@@ -53,7 +53,7 @@
         type: Object
       }
     },
-    created(){
+    created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
       this.$http.get('/api/goods').then(response => {
         response = response.body;
@@ -103,7 +103,6 @@
         let foodsList = this.$refs.foodsWrapper.getElementsByClassName('food-list');
         let el = foodsList[index];
         this.foodsScroll.scrollToElement(el, 300);
-        console.log(this.currentIndex);
       }
     },
     computed: {
@@ -117,6 +116,17 @@
           }
         }
         return 0;
+      },
+      selectFoods() {
+        let foodsList = [];
+        for(let good of Array.from(this.goods)) {
+          for(let food of Array.from(good.foods)) {
+            if(food.count) {
+              foodsList.push(food);
+            }
+          }
+        }
+        return foodsList;
       }
     },
     components: {

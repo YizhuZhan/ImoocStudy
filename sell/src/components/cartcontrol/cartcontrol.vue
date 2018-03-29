@@ -32,7 +32,6 @@
           Vue.delete(this.food, 'count');
           Vue.set(this.food, 'count', count);
         }
-        console.log(this.food.count);
       },
       decreaseCart(event) {
         if(!event._constructed) {
