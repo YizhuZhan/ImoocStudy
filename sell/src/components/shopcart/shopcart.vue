@@ -43,6 +43,28 @@
         }
       }
     },
+    data() {
+      return {
+        balls: [
+      {
+        show: false
+      },
+      {
+        show: false
+      },
+      {
+        show: false
+      },
+      {
+        show: false
+      },
+      {
+        show: false
+      }
+      ],
+      dropList: []
+      }
+    },
     computed: {
       totalPrice() {
         let total = 0;
@@ -65,7 +87,7 @@
         } else if(this.totalPrice === 0) {
           return `￥${this.minPrice}元起送`;
         } else {
-          return '去结算'
+          return '去结算';
         }
       },
       payClass() {
@@ -73,6 +95,18 @@
           return 'notEnough';
         } else {
           return 'enough';
+        }
+      }
+    },
+    methods:{
+      drop(el) {
+        for(let ball of this.balls) {
+          if(!ball.show) {
+            ball.el = el;
+            ball.show = true;
+            this.dropList.push(ball);
+            return;
+          }
         }
       }
     }
