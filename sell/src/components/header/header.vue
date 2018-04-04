@@ -64,7 +64,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript6">
+<script type="text/ecmascript-6">
   import star from 'components/star/star';
   import goods from 'components/goods/goods';
   export default {

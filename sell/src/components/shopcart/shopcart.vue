@@ -17,10 +17,19 @@
         </div>
       </div>
     </div>
+    <div class="ball-container">
+      <div v-for="(ball, index) in balls" v-bind:key="index">
+        <transition name="drop" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+          <div class="ball" v-show="ball.show">
+            <div class="inner inner-hook"></div>
+          </div>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
-<script type="text/ecmascript6">
+<script type="text/ecmascript-6">
   export default {
     props: {
       deliveryPrice: {
@@ -107,6 +116,42 @@
             this.dropList.push(ball);
             return;
           }
+        }
+      },
+      beforeEnter(el) {
+        for(let ball of this.dropList) {
+          if(ball.show) {
+            let rect = ball.el.getBoundingClientRect();
+            let x = rect.left - 32;
+            let y = -(rect.bottom - 22);
+            el.style.display = '';// 从display: none到显示
+            el.style.transform = `translate3d(0, ${y}px, 0)`;
+            console.log(el.style.transform);
+            el.style.webkitTransform = `translate3d(0, ${y}px, 0)`;
+            let inner = el.getElementsByClassName('inner-hook')[0];
+            inner.style.transform = `translate3d(${x}px, 0, 0)`;
+            inner.style.webkitTransform = `translate3d(${x}px, 0, 0)`;
+          }
+        }
+      },
+      enter(el, done) {
+        /* eslint-disable no-unused-vars */
+        let rf = el.offsetHeight;// 触发重绘html
+        this.$nextTick(() => {
+          el.style.transform = `translate3d(0, 0, 0)`;
+          el.style.webkitTransform = `translate3d(0, 0, 0)`;
+          let inner = el.getElementsByClassName('inner-hook')[0];
+          inner.style.transform = `translate3d(0, 0, 0)`;
+          inner.style.webkitTransform = `translate3d(0, 0, 0)`;
+          done();
+        });
+      },
+      afterEnter(el) {
+        // 移除数组第一个元素
+        let ball = this.dropList.shift();
+        if(ball) {
+          ball.show = false;
+          el.style.display = 'none';
         }
       }
     }
@@ -203,4 +248,17 @@
           &.enough
             background: #00b43c
             color: #fff
+  .ball-container
+    .ball
+      position: fixed
+      left: 32px
+      bottom: 22px
+      z-index: 200
+      transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+      .inner
+        width: 16px
+        height: 16px
+        border-radius: 50%
+        background: rgb(0, 160, 220)
+        transition: all 0.4s linear
 </style>

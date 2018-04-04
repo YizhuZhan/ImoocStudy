@@ -38,14 +38,11 @@
         </ul>
       </div>
       <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
-      <div class="ball-container">
-
-      </div>
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript6">
+<script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
   import shopcart from 'components/shopcart/shopcart';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
@@ -103,6 +100,7 @@
         this._drop(target);
       },
       _drop(target) {
+        // 优化体验，异步执行下落动画
         this.$nextTick(() => {
           this.$refs.shopcart.drop(target);
         })
