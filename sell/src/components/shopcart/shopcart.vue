@@ -123,7 +123,7 @@
           if(ball.show) {
             let rect = ball.el.getBoundingClientRect();
             let x = rect.left - 32;
-            let y = -(rect.bottom - 22);
+            let y = -(window.innerHeight - rect.top - 22);
             el.style.display = '';// 从display: none到显示
             el.style.transform = `translate3d(0, ${y}px, 0)`;
             console.log(el.style.transform);
@@ -143,7 +143,7 @@
           let inner = el.getElementsByClassName('inner-hook')[0];
           inner.style.transform = `translate3d(0, 0, 0)`;
           inner.style.webkitTransform = `translate3d(0, 0, 0)`;
-          done();
+          el.addEventListener('transitionend', done);
         });
       },
       afterEnter(el) {
