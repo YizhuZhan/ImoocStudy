@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="shopcart">
-      <div class="content">
+      <div class="content" @click="toggleList">
         <div class="content-left">
           <div class="logo-wrapper">
             <div class="logo" :class="{'highlight': totalCount > 0}">
@@ -26,11 +26,34 @@
         </transition>
       </div>
     </div>
+    <transition name="fold">
+      <div class="shopcart-list" v-show="listShow">
+        <div class="list-header">
+          <h1 class="title">购物车</h1>
+          <span class="empty">清空</span>
+        </div>
+        <div class="list-content">
+          <ul>
+            <li v-for="food in selectFoods" class="food">
+              <span class="name">{{food.name}}</span>
+              <div class="price">
+                <span>{{food.price*food.count}}</span>
+              </div>
+              <div class="cartcontrol-wrapper">
+                <cartcontrol :food="food"></cartcontrol>
+              </div>
+            </li>
+          </ul>
+        </div>
+    </div>
+    </transition>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import Cartcontrol from "../cartcontrol/cartcontrol";
   export default {
+    components: {Cartcontrol},
     props: {
       deliveryPrice: {
         type: Number,
@@ -71,7 +94,8 @@
         show: false
       }
       ],
-      dropList: []
+      dropList: [],
+      fold: true
       }
     },
     computed: {
@@ -105,6 +129,13 @@
         } else {
           return 'enough';
         }
+      },
+      listShow() {
+        let show = false;
+        if(this.totalCount > 0) {
+          show = !this.fold;
+        }
+        return show;
       }
     },
     methods:{
@@ -152,6 +183,11 @@
         if(ball) {
           ball.show = false;
           el.style.display = 'none';
+        }
+      },
+      toggleList() {
+        if(this.totalCount > 0) {
+          this.fold = !this.fold;
         }
       }
     }
@@ -261,4 +297,11 @@
         border-radius: 50%
         background: rgb(0, 160, 220)
         transition: all 0.4s linear
+  .shopcart-list
+    position: fixed
+    bottom: 611px
+    left: 0
+    width: 100%
+
+
 </style>
