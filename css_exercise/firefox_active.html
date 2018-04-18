@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>firefox认为:active伪类发生在mousedown之后</title>
+    <style>
+        .active-btn{
+            background: #0b8bd4;
+        }
+        .active-btn:active{
+            background: #ae0000
+        }
+    </style>
+</head>
+<body>
+    <a id="btn" class="active-btn">按下</a>
+    <a class="active-btn">按下</a>
+<script type="text/javascript">
+    var btn = document.getElementById('btn');
+    btn.addEventListener('mousedown',function(e){
+        e.preventDefault();
+    })
+</script>
+</body>
+</html>
