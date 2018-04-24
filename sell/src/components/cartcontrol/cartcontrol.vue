@@ -6,7 +6,7 @@
       </div>
     </transition>
     <div class="cart-count" v-show="food.count > 0">{{food.count}}</div>
-    <div class="cart-add" @click.stop.prevent="addCart($event)">
+    <div class="cart-add" @click="addCart($event)">
       <div class="icon-add_circle"></div>
     </div>
   </div>
@@ -28,10 +28,10 @@
         if(!this.food.count) {
           Vue.set(this.food, 'count', 1);
         } else{
-          let count = this.food.count + 1
-          Vue.delete(this.food, 'count');
-          Vue.set(this.food, 'count', count);
-        }
+          let count = this.food.count + 1;
+        Vue.delete(this.food, 'count');
+        Vue.set(this.food, 'count', count);
+      }
         this.$emit('add', event.target);
       },
       decreaseCart(event) {
@@ -39,7 +39,7 @@
           return;
         }
         if(this.food.count > 0) {
-          let count = this.food.count - 1
+          let count = this.food.count - 1;
           Vue.delete(this.food, 'count');
           if(count > 0) {
             Vue.set(this.food, 'count', count);
