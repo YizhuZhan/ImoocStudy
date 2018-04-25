@@ -46,6 +46,9 @@
           </div>
         </div>
       </transition>
+      <transition name="fade">
+        <div class="list-mask" @clilck="hideList" v-show="listShow"></div>
+      </transition>
     </div>
   </div>
 </template>
@@ -96,13 +99,31 @@
       }
       ],
       dropList: [],
-      fold: true
+      fold: true,
+      listShow: false
       }
     },
     watch: {
       totalCount: function () {
         if(this.totalCount === 0) {
           this.fold = true;
+          this.listShow = false;
+        }
+      },
+      fold: function () {
+        if(this.totalCount) {
+          this.listShow = !this.fold;
+          if(this.listShow) {
+            this.$nextTick(() => {
+              if(!this.listScroll){
+                this.listScroll = new BScroll(this.$refs.listContent, {
+                  click: true
+                });
+              } else {
+                this.listScroll.refresh();
+              }
+            })
+          }
         }
       }
     },
@@ -137,21 +158,6 @@
         } else {
           return 'enough';
         }
-      },
-      listShow() {
-        let show = !this.fold;
-        if(show) {
-          this.$nextTick(() => {
-            if(!this.listScroll){
-              this.listScroll = new BScroll(this.$refs.listContent, {
-                click: true
-              });
-            } else {
-              this.listScroll.refresh();
-            }
-          })
-        }
-        return show;
       }
     },
     methods:{
@@ -209,6 +215,9 @@
           return;
         }
         this.fold = !this.fold;
+      },
+      hideList() {
+        this.fold = true;
       }
     }
   };
@@ -372,4 +381,8 @@
             position: absolute
             right: 0
             bottom: 12px
+    .list-mask
+      position: fixed
+      top: 0
+      left: 0
 </style>
