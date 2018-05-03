@@ -153,7 +153,6 @@
     position: absolute
     top: 174px
     bottom: 48px
-    width: 100%
     overflow: hidden
     .menu-wrapper
       flex: 0 0 80px

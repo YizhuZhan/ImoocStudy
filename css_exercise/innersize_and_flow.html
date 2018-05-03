@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内部尺寸与流体特性</title>
+    <style>
+        .father{
+            width: 400px;
+            margin: 50px 0;
+        }
+        .box{
+            text-align: center;
+            margin: 50px 20px;
+            padding: 50px 20px;
+            background: #f00;
+        }
+        .content{
+            display: inline-block;
+            text-align: left;
+            color: #fff;
+        }
+        .ao,.tu{
+            display: inline-block;
+            width: 0;
+            margin: 10px 60px;
+        }
+        .ao:before,.tu:before{
+            font-family: Consolas, Monaco, monospace;
+            outline: 2px solid #000;
+            background: #f00;
+            color: #f00;
+            font-size: 24px;
+            line-height: 28px;
+        }
+        .ao:before{
+            content: 'love你love';
+        }
+        .tu:before{
+            content: '你love你';
+            direction: rtl;
+         }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <h1>（1）包裹性</h1>
+        <div class="box">
+            <span id='add-content' class="content">文字内容</span>
+        </div>
+        <input id='btn' type="button" value="点击增加文字">
+    </div>
+    <script type="text/javascript">
+        var btn = document.getElementById('btn');
+        var add_content = document.getElementById('add-content');
+        btn.addEventListener('click', function () {
+            add_content.innerHTML += '-新增文字';
+        });
+    </script>
+
+    <div class="father">
+        <h1>（2）首选最小宽度</h1>
+        <div>
+            <span class="ao"></span>
+            <span class="tu"></span>
+        </div>
+    </div>
+
+    <h1>（3）最大宽度</h1>
+     <div style="display: inline-block;">
+         "我是文本"
+         <span>我在inline标签内</span>
+         <button>我是按钮</button>
+         <img src="3-1.png" alt="我是图片">
+         <br>
+         "我是下一行"
+         <p>我是一段描述</p>
+    </div>
+
+</body>
+</html>

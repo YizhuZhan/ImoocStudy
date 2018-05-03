@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>width: auto</title>
+    <style>
+        .father{
+            margin: 50px 0;
+            background: #1abc9c;
+            font-size: 24px;
+        }
+        .auto-demo-1{
+            width: auto;
+            background: #feffea;
+            margin-bottom: 10px;/* margin 是透明的，background 不包括 margin */
+        }
+        .auto-demo-2{
+            display: inline-block;/*父元素为inline-block,table,绝对定位,浮动时*/
+            /*position: absolute;!*absolute, fixed均可*!*/
+            /*float: right;*/
+            width: auto;
+            background: red;
+        }
+        .shrink-to-fit-feature{
+            width: 200px;
+            text-align: center;
+            background: #feffea;
+        }
+        .auto-demo-3{
+            margin: 50px 0;
+            width: 200px;
+            text-align: left;
+            font-size: 24px;
+        }
+        .auto-demo-3 table td{
+            border: 1px solid #fddfd0;
+        }
+        .auto-demo-4{
+            width: 150px;
+            background: #feffea;
+            /*white-space: nowrap;!*或者是遇见特别长的连续英文单词或者数字*!*/
+            font-size: 24px;
+        }
+        .child{
+            display: inline-block;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="auto-demo-1">
+            （1）宽度默认100%于父级容器
+        </div>
+    </div>
+
+    <div class="father">
+        <div class="auto-demo-2">
+            <div class="shrink-to-fit-feature">
+                （2）收缩与包裹
+            </div>
+        </div>
+    </div>
+
+    <div class="auto-demo-3">
+        <table>
+            <tbody>
+            <tr>
+                <td>就1列就1列就1列就1列就1列就1列</td>
+                <td>当父级relative，且宽度很小的时候，例如{position:relative; width:20px;}，absolute元素也会出现一柱擎天的情况；</td>
+                <td>当父级relative，且宽度很小的时候，例如{position:relative; width:20px;}，absolute元素也会出现一柱擎天的情况；</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="auto-demo-4">
+        <span class="child">恰似一江春水向东流，流到断崖也不回头...</span>
+        <!--<span class="child">abcdefghaklgjkdklskghlslgkaakdkkkdkkslls11111111112432532543恰似一江春水</span>-->
+    </div>
+
+</body>
+</html>

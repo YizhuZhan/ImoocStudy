@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>inline-table外在盒子是内联盒子（元素在一行显示），内在盒子是table（管宽高和内容呈现）</title>
+    <style>
+        .inline-table {
+            display: inline-table;
+            width: 80px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            background: #feffea;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span>和文字平起平坐的表格</span>
+        <div class="inline-table">第1列</div>
+        <div class="inline-table">第2列</div>
+    </div>
+</body>
+</html>

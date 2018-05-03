@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>“块级元素”具有换行特性，理论上可以配合clear属性清除浮动带来的影响</title>
+    <style>
+        .clear {
+            background: #0b8bd4;
+            padding: 10px;
+        }
+        .clear>img {
+            float:left;/*会产生高度塌陷*/
+        }
+        .clear:after {
+            content: '';
+            display: block;/*或者block,list-item,table*/
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div class="clear">
+    <img src="3-1.png">
+</div>
+</body>
+</html>
