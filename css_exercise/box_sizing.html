@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>box-sizing设计的初衷</title>
+    <style>
+        .father{
+            border: 1px solid #000;
+            padding: 10px 10px;
+            background: #fddfd0;
+        }
+        .father textarea{
+            width: 100%;
+            border: 0
+        }
+        .textarea{
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid #000;
+            padding: 10px 10px;
+            line-height: 20px;
+            font-size:14px
+        }
+    </style>
+</head>
+<body>
+    <h2>box-sizing设计的初衷，是用于普通文本框input和文本域textarea的100%自适应父容器宽度</h2><br/>
+    <h2>(1)在浏览器支持box-sizing以前的解决方法</h2>
+    <div class="father">
+        <textarea>用一层父容器模拟必要的padding和border，然后用width:100%自适应父容器</textarea>
+    </div>
+    <br/>
+    <h2>(2)使用box-sizing解决</h2>
+    <div style="background: #fddfd0;">
+        <textarea class="textarea">用一层父容器模拟必要的padding和border，然后用width:100%自适应父容器</textarea>
+    </div>
+
+</body>
+</html>
