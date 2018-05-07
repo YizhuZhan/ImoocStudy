@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绝对定位元素的宽高比设置</title>
+    <style>
+        .box{
+            height: 160px;
+            padding: 30px;
+            box-sizing: border-box;
+            background: #beceeb;
+        }
+        .set-pos-box{
+            position: relative;
+        }
+        .child{
+            height: 100%;
+            background: #cd0000;
+            text-align: center;
+        }
+        .set-pos-child{
+            position: absolute;
+            width: 100%;
+        }
+        .img-box{
+            display: inline-block;
+            position: relative;
+        }
+        .prev,.next{
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            opacity: .5;
+        }
+        .prev{
+            left: 0;
+            background: #cd0000;
+        }
+        .next{
+            right: 0;
+            background: #34538b;
+        }
+        .img-box > img{
+            display: block;/* 如果去掉display: block 则不是恰好包裹 */
+        }
+
+    </style>
+</head>
+<body>
+    <h2>绝对定位元素的宽高比计算会是相对于padding-box的，会将padding计算在内</h2>
+    <div class="box set-pos-box">
+        <div class="child set-pos-child">高度100px</div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <h2>非绝对定位元素的宽高比计算会是相对于content-box的，不会将padding计算在内</h2>
+    <div class="box">
+        <div class="child">高度160px</div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="img-box">
+        <a class="prev" href="#">上一张</a>
+        <a class="next" href="#">下一张</a>
+        <img src="3-1.png" style="width: 256px;height:192px;">
+    </div>
+</body>
+</html>
