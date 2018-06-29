@@ -15,6 +15,9 @@ app.get('/', (req, res, next) => {
         var items = []
         var $ = cheerio.load(sres.text)
         var topics = $('#topic_list .topic_title')
+        console.log(topics)
+        console.log($(topics[0]))
+        console.log($(topics[0]).attr('title'))
         var authors = $('#topic_list .user_avatar img')//作者信息在头像图片的title里
         topics.each((index, element) => {
             var $element = $(element)

@@ -9,12 +9,12 @@
             padding: 10px;
         }
         .clear>img {
-            float:left;/*会产生高度塌陷*/
+            float:right;/*会产生高度塌陷*/
         }
         .clear:after {
             content: '';
             display: block;/*或者block,list-item,table*/
-            clear: both;
+            clear: both;/*或者left也可以*/
         }
     </style>
 </head>
