@@ -7,26 +7,33 @@ body,h1,h2,h3 {margin: 0; padding: 0}
 .fr {float: right;}
 .clear {zoom:1;}
 .clear:after{content:'';display: block;clear: both;}
+.gradient {
+    background: -webkit-linear-gradient(top,#ffffff,#f9f9f9);/*chrome,safari*/
+    background: -moz-linear-gradient(top,#ffffff,#f9f9f9);/*firefox*/
+    background: -ms-linear-gradient(top,#ffffff,#f9f9f9);/*IE*/
+    background: -o-linear-gradient(top,#ffffff,#f9f9f9);/*opera*/
+    background: linear-gradient(top,#ffffff,#f9f9f9);/*other*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType = 0, startColorstr = #ffffff, endColorstr = #f9f9f9);"
+
+}
 
 
 /* layout */
-#header
-#nav
-#search
+#header {height:30px;width:960px;margin:0 auto;border-radius: 0 0 6px 6px;}
+#nav {height:100px;width:960px;margin: 0 auto;background:#ffc;}
+#search {height:114px;width:958px;margin:0 auto 10px;border:1px solid #dbdbdb;border-radius:6px;}
+.content {width:960px;margin:0 auto;}
 
-
-.content
-
-.main
+.main {width:710px}
 .main-wrapper
-.section
-.option
+.section {width:318px;height:200px;padding:0 15px;border:1px solid #dbdbdb;border-radius:6px;margin-bottom:10px;}
+.option {border:1px solid #dbdbdb;border-radius:6px;}
 .ad
 
-.side
-.side-section
-side-ad
+.side {width:240px}
+.side-section {border:1px solid #dbdbdb;border-radius:6px;}
+.side-ad {border:1px solid #dbdbdb;border-radius:6px;}
 
 
 
-#footer
+#footer {}
