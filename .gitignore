@@ -27,4 +27,7 @@ springmvc/.idea
 springmvc/springmvc.iml
 springmvc/target/classes
 .gitignore.bak
+.vscode
+nodejs-study/node_modules
+nodejs-study/package-lock.json
 

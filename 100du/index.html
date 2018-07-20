@@ -6,46 +6,106 @@
         <link href="css/style.css" rel="stylesheet" />
         <link href='img/100du.ico' rel='shortcut icon'>
         <script src='js/jquery-1.8.3.min.js'></script>
+        <script src='js/DD_belatedPNG_0.0.8a.js'></script>
+        <!--[if IE 6]>
+        <script>
+           
+            DD_belatedPNG.fix("*")
+        </script>
+        <![endif]-->
+
         <!-- <script>
-            $(function() {
+         $(function() {
                 $('body').html(123456);
             })
         </script> -->
     </head>
     <body>
-        <div id="header" class="gradient"></div>
-        <div id="nav"></div>
-        <div id="search"></div>
-        <div class="content">
-            <div class="main">
-                <div class="main-wrapper">
+        <div id="header" class="gradient">
+            <p class="city">
+                切换城市：
+                <a class="active" href="#">北京</a>
+                <a href="#">上海</a>
+                <a href="#">福州</a>
+                <a href="#">广州</a>
+                <a href="#">深圳</a>
+            </p>
+            <p class="link">
+                <a class="ico1" href="#">加盟100度</a> |
+                <a class="ico2" href="#">店铺管理</a>
+            </p>
+        </div>
+        <div id="nav">
+            <ul class="nav_1">
+                <li><a class="bg1" href="#">美食</a></li>
+                <li><a class="bg2" href="#">夜店</a></li>
+                <li><a class="bg3" href="#">购物</a></li>
+                <li><a class="bg4" href="#">文化</a></li>
+                <li><a class="bg5" href="#">休闲</a></li>
+            </ul>
+            <h1><a href="#"><img src="./img/logo.png" alt="100度享乐网"></a></h1>
+            <ul class="nav_2">
+                <li><a class="bg6" href="#">烧客空间</a></li>
+                <li><a class="bg7" href="#">知道分子</a></li>
+                <li><a class="bg8" href="#">白吃白拿</a></li>
+                <li><a class="bg9" href="#">烧客论坛</a></li>
+                <li><a class="bg10" href="#">企业俱乐部</a></li>
+            </ul>
+        </div>
+        <div id="search" class="gradient">
+            <div class="bar">
+                <ul class="menu">
+                    <li class="active">搜店</li>
+                    <li>地址</li>
+                    <li>优惠券</li>
+                    <li>全文</li>
+                    <li>视频</li>
+                </ul>
+            </div>
+            <div class="triangle_up"></div>
+        </div>
+        <div class="content clear">
+            <div class="main fl">
+                <div class="main-wrapper clear">
                     <div class="section fl"></div>
-                    <div class="option fr"></div>
+                    <div class="option fr">
+                        <ul class="nav">
+                            <li class="active fl"></li>
+                            <li class="fr"></li>
+                        </ul>
+                        <div class="con"></div>
+                    </div>
                 </div>
-                <div class="ad"></div>
-                <div class="main-wrapper">
+                <div class="main-ad"><a href="http://www.miaov.com"><img src="img/ad/ad1.jpg"></a></div>
+                <div class="main-wrapper clear">
                     <div class="section fl"></div>
                     <div class="section fr"></div>
                 </div>
-                <div>
-                    <div class="option fl"></div>
+                <div class="main-wrapper clear">
+                    <div class="option fl">
+                        <ul class="nav">
+                            <li class="active fl"></li>
+                            <li class="fr"></li>
+                        </ul>
+                        <div class="con"></div>
+                    </div>
                     <div class="section fr"></div>
                 </div>
-                <div class="ad"></div>
-                <div class="main-wrapper">
+                <div class="main-ad"><a href="http://www.miaov.com"><img src="img/ad/ad1.jpg"></a></div>
+                <div class="main-wrapper clear">
                     <div class="section fl"></div>
                     <div class="section fr"></div>
                 </div>
-                <div class="main-wrapper">
+                <div class="main-wrapper clear">
                     <div class="section fl"></div>
                     <div class="section fr"></div>
                 </div>
             </div>
             
-            <div class="side">
+            <div class="side fr">
                 <div class="side-section"></div>
-                <div class="side-ad"></div>
-                <div class="side-ad"></div>
+                <div class="side-ad ad-border"><a href="http://www.miaov.com"><img src="img/ad/ad2.jpg"></a></div>
+                <div class="side-ad"><a href="http://www.miaov.com"><img src="img/ad/ad3.jpg"></a></div>
                 <div class="side-section"></div>
                 <div class="side-section"></div>
                 <div class="side-section"></div>
@@ -53,7 +113,7 @@
                 <div class="side-section"></div>
             </div>
         </div>
-        <div class="footer"></div>
+        <div id="footer"></div>
     </body>
 </html>
 
