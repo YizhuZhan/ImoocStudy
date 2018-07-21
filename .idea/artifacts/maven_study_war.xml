@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="maven-study:war">
-    <output-path>$PROJECT_DIR$/maven-study/target</output-path>
-    <root id="archive" name="maven-study-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="maven-study:war exploded" />
-    </root>
-  </artifact>
-</component>
