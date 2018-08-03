@@ -30,7 +30,7 @@ body {font-size:12px; font-family:"微软雅黑";}
 
 /* layout */
 #header,#nav,.content{ width:960px; margin:0 auto; }
-#search,.section,.side-section,.ad-border { border:1px solid #dbdbdb; border-radius:6px; }
+#search,.section,.side-section,.ad-border,.activity,.recommand { border:1px solid #dbdbdb; border-radius:6px; }
 .main-ad,.side-section,.side-ad { margin-bottom:10px; }
 
 #header { height:30px;  border-radius: 0 0 6px 6px; }
@@ -183,7 +183,6 @@ body {font-size:12px; font-family:"微软雅黑";}
 .soso .text { width:172px; height:20px; padding:0 4px; border:1px solid #dadada; line-height:20px; color:#9c9c9c; }
 .soso .btn { width:24px; height:25px; background:url(../img/btn.gif) no-repeat; border:none; margin-left:10px; }
 
-.pic_list { }
 .pic_list li { padding:10px 0; }
 .pic_list .img { width:96px; height:73px; margin-right:12px; }
 .pic_list .img a { display:block; width:90px; height:67px; padding:2px; border:1px solid #dadada; }
@@ -198,3 +197,25 @@ body {font-size:12px; font-family:"微软雅黑";}
 
 .wrap_section2 { padding-bottom:12px; }
 .wrap_section2 li { border-bottom:1px dotted #dadada;  }
+
+.new_title { width:348px; height:71px; background:url(../img/new_title_bg.gif) no-repeat right 0; position: relative;}
+.new_title strong, .new_title span { position:absolute; left:24px; }
+.new_title strong { font-size:12px; font-family:arial; color:#ea2b31; top:22px; }
+.new_title span { font-size:24px; color:#333; top:31px; font-weight:normal; }
+.new_title em { font-size:36px; font-weight:bold; color:#ec1c16; position:absolute; left:125px; top:16px; }
+
+.activity,.recommand { width:348px; height:498px; }
+.recommand .new_title { background-position:right -70px; }
+.activity .con { padding:0px 24px; background:url(../img/activity_bg.gif) no-repeat;}
+.activity .info { height:104px; padding-top:16px; }
+.activity .img{ position: relative; }
+.activity .mask { display:block; width:84px; height:84px; background:url(../img/activity_bg.gif) no-repeat -372px 0px; position: absolute; left:0; top:0; }
+.activity .text { width:204px; padding-left:12px; }
+.activity h3 { height:32px; font-size:12px; overflow:hidden; }
+.activity .text em,.activity .text span { float:left; margin-right:4px; }
+.activity .text em { display:block; width:25px; height:25px; float:left; line-height:25px; text-align:center; background:url(../img/activity_bg.gif) no-repeat -348px 0; font-family:arial; font-size:14px; color:#cf3530;  }
+.activity .text span { text-indent: 2px; padding-top:3px; }
+.activity .text p { line-height:18px; color:#999; }
+
+.calendar {}
+
